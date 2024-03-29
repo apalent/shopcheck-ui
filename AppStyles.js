@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#F0F0F3', // A light background color
+        paddingHorizontal: 10,
       },
       header: {
         flexDirection: 'row',
@@ -53,6 +54,27 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         color: '#666',
       },
+      itemContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 10,
+        backgroundColor: '#fff',
+      },
+      checkBox: {
+        marginRight: 10,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 5,
+        padding: 5,
+      },
+      checkText: {
+        fontSize: 16,
+      },
+      deleteText: {
+        color: '#fff',
+        fontWeight: 'bold',
+      },
+
       listContentContainer: {
         paddingBottom: 20,
       },
@@ -63,9 +85,11 @@ export const styles = StyleSheet.create({
         width: 100, // Adjust width as necessary
         height: '100%',
       },
-      deleteText: {
-        color: 'white',
+      sectionHeader: {
+        fontSize: 18,
         fontWeight: 'bold',
+        marginTop: 10,
+        marginBottom: 5,
       },
       centeredView: {
         flex: 1,

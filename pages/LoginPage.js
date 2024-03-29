@@ -39,7 +39,7 @@ function LoginPage({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Welcome</Text>
+      <Text style={styles.header}>welcome</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"

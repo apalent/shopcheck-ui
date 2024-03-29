@@ -18,8 +18,9 @@ import SwipeableItem from '../components/SwipeableItem';
 
 function ShoppingListPage({ navigation }) {
   const [items, setItems] = useState([
-    { id: '1', name: 'Apples', description: 'Red apples' },
-    { id: '2', name: 'Bread', description: 'Whole wheat bread' },
+    { id: '1', name: 'Apples', description: 'Red apples', purchased: false },
+    { id: '2', name: 'Bread', description: 'Whole wheat bread', purchased: false },
+   
     // More items can be initialized here
   ]);
 
@@ -43,6 +44,19 @@ function ShoppingListPage({ navigation }) {
     setModalVisible(false);
   };
 
+  const handleMarkAsPurchased = (itemId) => {
+    setItems((prevItems) => {
+      const updatedItems = prevItems.map((item) => {
+        if (item.id === itemId) {
+          return { ...item, purchased: !item.purchased };
+        }
+        return item;
+      });
+      const sortedItems = updatedItems.sort((a, b) => a.purchased - b.purchased);
+      return sortedItems;
+    });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -62,6 +76,7 @@ function ShoppingListPage({ navigation }) {
             onDelete={(itemId) => {
               setItems(items.filter(it => it.id !== itemId));
             }}
+            onMarkAsPurchased={handleMarkAsPurchased}
           />
         )}
         contentContainerStyle={styles.listContentContainer}
