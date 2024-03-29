@@ -13,6 +13,18 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingTop: 15,
       },
+      shoppingListContainer: {
+        marginBottom: 10,
+        padding: 10,
+        backgroundColor: '#FFFFFF',
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#CCCCCC',
+      },
+      shoppingListTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+      },
       addButton: {
         backgroundColor: '#007AFF', // Primary action color
         width: 36,

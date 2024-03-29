@@ -11,7 +11,7 @@ function LoginPage({ navigation }) {
     // Perform login authentication logic here
     console.log('Logging in with email:', email, 'and password:', password);
     // For now, I'm just navigating to the shopping list page
-    navigation.navigate('ShoppingList');
+    navigation.navigate('HomePage');
   };
 
   const handleSignup = () => {

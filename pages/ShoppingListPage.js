@@ -18,11 +18,11 @@ import SwipeableItem from '../components/SwipeableItem';
 
 function ShoppingListPage({ navigation }) {
   const [items, setItems] = useState([
-    { id: '1', name: 'Apples', description: 'Red apples', purchased: false },
-    { id: '2', name: 'Bread', description: 'Whole wheat bread', purchased: false },
-   
+    { id: '1', name: 'Apples', description: 'Red apples', isPurchased: false },
+    { id: '2', name: 'Bread', description: 'Whole wheat bread', isPurchased: false },
     // More items can be initialized here
   ]);
+
 
   const [modalVisible, setModalVisible] = useState(false);
   const [newItemName, setNewItemName] = useState('');
@@ -44,18 +44,21 @@ function ShoppingListPage({ navigation }) {
     setModalVisible(false);
   };
 
-  const handleMarkAsPurchased = (itemId) => {
-    setItems((prevItems) => {
-      const updatedItems = prevItems.map((item) => {
-        if (item.id === itemId) {
-          return { ...item, purchased: !item.purchased };
-        }
-        return item;
-      });
-      const sortedItems = updatedItems.sort((a, b) => a.purchased - b.purchased);
-      return sortedItems;
-    });
+  const handleDeleteItem = (itemId) => {
+    setItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
   };
+
+  const handleToggleMark = (itemId) => {
+    setItems((prevItems) =>
+    prevItems.map((item) => {
+      if (item.id === itemId) {
+        return { ...item, isPurchased: !item.isPurchased };
+      }
+      return item;
+    })
+  );
+};
+  
 
   return (
     <View style={styles.container}>
@@ -67,19 +70,39 @@ function ShoppingListPage({ navigation }) {
           <Text style={styles.editButtonText}>Edit</Text>
         </TouchableOpacity>
       </View>
+      <Text style={styles.sectionHeader}>Unpurchased Items</Text>
       <FlatList
         data={items}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <SwipeableItem
-            item={item}
-            onDelete={(itemId) => {
-              setItems(items.filter(it => it.id !== itemId));
-            }}
-            onMarkAsPurchased={handleMarkAsPurchased}
-          />
-        )}
-        contentContainerStyle={styles.listContentContainer}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => {
+          if (!item.isPurchased) {
+            return (
+              <SwipeableItem
+                item={item}
+                onDelete={handleDeleteItem}
+                onMarkAsPurchased={handleToggleMark}
+              />
+            );
+          }
+          return null; // Don't render if the item is purchased
+        }}
+      />
+       <Text style={styles.sectionHeader}>Purchased Items</Text>
+      <FlatList
+        data={items}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => {
+          if (item.isPurchased) {
+            return (
+              <SwipeableItem
+                item={item}
+                onDelete={handleDeleteItem}
+                onMarkAsPurchased={handleToggleMark}
+              />
+            );
+          }
+          return null; // Don't render if the item is unpurchased
+        }}
       />
       {/* Modal for Adding New Item */}
       <Modal

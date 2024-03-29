@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import LoginPage from './pages/LoginPage'; // Assume you have this page
 import ShoppingListPage from './pages/ShoppingListPage'; // Assume you have this page
+import HomePage from './pages/HomePage';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +15,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="EnterId" component={LoginPage} options={{ title: 'Enter Credentials' }} />
+        <Stack.Screen name="HomePage" component={HomePage} />
         <Stack.Screen name="ShoppingList" component={ShoppingListPage} options={{ title: 'Shopping List' }} />
       </Stack.Navigator>
     </NavigationContainer>
