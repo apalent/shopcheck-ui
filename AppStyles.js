@@ -74,10 +74,6 @@ export const styles = StyleSheet.create({
         color: '#fff',
         fontWeight: 'bold',
       },
-
-      listContentContainer: {
-        paddingBottom: 20,
-      },
       deleteBox: {
         backgroundColor: 'red',
         justifyContent: 'center',
