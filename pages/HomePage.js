@@ -1,5 +1,5 @@
 import React ,{useState} from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList,Button, TouchableOpacity, Modal ,TextInput,Platform, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView} from 'react-native';
 import { styles } from '../AppStyles';
 const HomePage = ({ navigation }) => {
 
@@ -10,9 +10,9 @@ const HomePage = ({ navigation }) => {
       ]);
       const [newListName, setNewListName] = useState('');
       const [newListDescription, setNewListDescription] = useState('');
-      const [isModalVisible, setIsModalVisible] = useState(false);
+      const [modalVisible, setModalVisible] = useState(false);
       const handleAddNewList = () => {
-        setIsModalVisible(true);
+        setModalVisible(true);
       };
 
     const handleShoppingListPress = (shoppingListId) => {
@@ -20,10 +20,14 @@ const HomePage = ({ navigation }) => {
         navigation.navigate('ShoppingList', { shoppingListId });
       };
     
-      const handleAddPress = () => {
-        setNewItemName('');
-        setNewItemDescription('');
-        setModalVisible(true);
+      const handleAddItem = () => {
+        const newItem = {
+          id: Date.now().toString(),
+          name: newItemName,
+          description: newItemDescription,
+        };
+        setItems(currentItems => [...currentItems, newItem]);
+        setModalVisible(false);
       };
       return (
         <View style={styles.container}>
@@ -50,6 +54,38 @@ const HomePage = ({ navigation }) => {
               </TouchableOpacity>
             )}
           />
+            {/* Modal for Adding New Item */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.centeredView}>
+            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.modalView}>
+              <TextInput
+                placeholder="List Name"
+                value={newListName}
+                onChangeText={setNewListName}
+                style={styles.modalTextInput}
+                autoFocus={true}
+              />
+              <TextInput
+                placeholder="Description"
+                value={newListDescription}
+                onChangeText={setNewListDescription}
+                style={styles.modalTextInput}
+              />
+              <View style={styles.modalButtonContainer}>
+                <Button title="Cancel" onPress={() => setModalVisible(false)} />
+                <Button title="Add" onPress={handleAddItem} />
+              </View>
+            </KeyboardAvoidingView>
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
         </View>
       );
 };
