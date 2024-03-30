@@ -47,18 +47,16 @@ function ShoppingListPage({ navigation }) {
   const handleDeleteItem = (itemId) => {
     setItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
   };
-
-  const handleToggleMark = (itemId) => {
-    setItems((prevItems) =>
+  const handleToggleMark = (itemId, isPurchased) => {
+  setItems((prevItems) =>
     prevItems.map((item) => {
       if (item.id === itemId) {
-        return { ...item, isPurchased: !item.isPurchased };
+        return { ...item, isPurchased };
       }
       return item;
     })
   );
 };
-  
 
   return (
     <View style={styles.container}>
@@ -80,7 +78,7 @@ function ShoppingListPage({ navigation }) {
               <SwipeableItem
                 item={item}
                 onDelete={handleDeleteItem}
-                onMarkAsPurchased={handleToggleMark}
+                onToggleMark={(itemId, isPurchased) => handleToggleMark(itemId, isPurchased)}
               />
             );
           }
@@ -97,7 +95,7 @@ function ShoppingListPage({ navigation }) {
               <SwipeableItem
                 item={item}
                 onDelete={handleDeleteItem}
-                onMarkAsPurchased={handleToggleMark}
+                onToggleMark={(itemId, isPurchased) => handleToggleMark(itemId, isPurchased)}
               />
             );
           }

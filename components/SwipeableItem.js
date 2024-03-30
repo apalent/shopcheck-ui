@@ -1,9 +1,13 @@
-// SwipeableItem.js
 import React from 'react';
 import { Swipeable } from 'react-native-gesture-handler';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { styles } from '../AppStyles'; 
-const SwipeableItem = ({ item, onDelete, onMarkAsPurchased }) => {
+
+const SwipeableItem = ({ item, onDelete, onToggleMark }) => {
+  const handleToggleMark = () => {
+    onToggleMark(item.id, !item.isPurchased); // Toggle the isPurchased property
+  };
+
   const renderRightActions = (progress, dragX) => {
     return (
       <TouchableOpacity onPress={() => onDelete(item.id)} style={styles.deleteBox}>
@@ -14,10 +18,10 @@ const SwipeableItem = ({ item, onDelete, onMarkAsPurchased }) => {
 
   return (
     <Swipeable renderRightActions={renderRightActions}>
-      <TouchableOpacity onPress={() => onMarkAsPurchased(item.id)} style={styles.itemContainer}>
-        <View style={styles.checkBox}>
+      <TouchableOpacity style={styles.itemContainer}>
+        <TouchableOpacity onPress={handleToggleMark} style={styles.checkBox}>
           <Text style={styles.checkText}>{item.isPurchased ? '✓' : '○'}</Text>
-        </View>
+        </TouchableOpacity>
         <View>
           <Text style={styles.itemName}>{item.name}</Text>
           <Text style={styles.itemDescription}>{item.description}</Text>
@@ -26,6 +30,5 @@ const SwipeableItem = ({ item, onDelete, onMarkAsPurchased }) => {
     </Swipeable>
   );
 };
-
 
 export default SwipeableItem;
