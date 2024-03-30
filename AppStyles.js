@@ -45,18 +45,6 @@ export const styles = StyleSheet.create({
         fontSize: 18,
         color: '#007AFF', // Matching the primary action color for consistency
       },
-      itemContainer: {
-        backgroundColor: 'white',
-        padding: 20,
-        marginHorizontal: 20,
-        marginTop: 10,
-        borderRadius: 10,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-        elevation: 3, // For Android shadow
-      },
       itemName: {
         fontSize: 18,
         fontWeight: 'bold',
