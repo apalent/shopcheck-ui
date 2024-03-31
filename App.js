@@ -15,7 +15,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="EnterId" component={LoginPage} options={{ title: 'Enter Credentials' }} />
-        <Stack.Screen name="HomePage" component={HomePage} />
+        <Stack.Screen name="HomePage" component={HomePage} options={{ headerShown: false }}/>
         <Stack.Screen name="ShoppingList" component={ShoppingListPage} options={{ title: 'Shopping List' }} />
       </Stack.Navigator>
     </NavigationContainer>
