@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingHorizontal: 20,
-        paddingTop: 15,
+        paddingTop: 10,
       },
       shoppingListContainer: {
         marginBottom: 10,
@@ -32,6 +32,8 @@ export const styles = StyleSheet.create({
         borderRadius: 18,
         alignItems: 'center',
         justifyContent: 'center',
+        position: 'absolute',
+        right: 10, // Adjust this value as needed
       },
       addButtonText: {
         fontSize: 24,
@@ -40,6 +42,7 @@ export const styles = StyleSheet.create({
       },
       editButton: {
         backgroundColor: 'transparent',
+        marginTop:10,
       },
       editButtonText: {
         fontSize: 18,
@@ -126,4 +129,12 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     width: '100%', // Ensure buttons span the full width of the modal
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    marginTop: 50, 
+    marginBottom: 50,
+  },  
+
 });
